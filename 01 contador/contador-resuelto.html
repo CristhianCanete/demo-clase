@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Contador</title>
+    <!-- <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script> -->
+    <script defer src="../cdn.min.js"></script>
+  </head>
+  <body>
+
+    <!-- Variables reactivas definidas en x-data  dentro de un objeto -->
+    <!-- Solo existira en el elemento definido o en sus descendientes! -->
+    <div x-data="{count: 0}">
+      <!-- x-on: o @ - similar a addEventListener -->
+      <!-- Agregar un eventListener, en este ejemplo se agrega el evento Click -->
+      <!-- Y entre comillas modificamos count -->
+      <!-- Notar que al modificar count automaticamente el nuevo valor se refleja en la pagina -->
+      <button @click="count--">-1</button>
+      <button @click="count++">+1</button>
+      <!-- x-text permite actualizar el innerText de un elemento en base a una variable -->
+      <p>The current count is <strong x-text="count"></strong>.</p>
+      <button @click="count = 0">reset</button>
+    </div>
+
+    <!-- Este bloque comentado NO funciona
+    Porque intenta modificar "count" pero no esta dentro del alcance de la variable
+    Ya que esta fuera del DIV donde se definido x-data -->
+    <!-- <button @click="count = 0">reset</button> -->
+  </body>
+</html>

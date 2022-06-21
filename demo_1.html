@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <title>Ejercico 1</title>
+</head>
+<body>
+    
+    <div x-data="start()">
+        <form class="" action="#">
+            <fieldset>
+                <label for="pokemon">Escribir la pokemon del perro en ingles</label>
+                <input x-model="raza" id="raza" type="text" name="" @input.debounce.1000ms="getFotoFromApi()">
+            </fieldset>
+        </form>
+
+        <div>
+            <p x-text="mensajeError"></p>
+        </div>
+
+        <div x-show="urlImagen">
+            <img :src="urlImagen" alt="Imagen de perro">
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        function start(){
+            return {
+                raza: 'corgi',
+                urlImagen: '',
+                mensajeError: '',
+                init() {
+                    this.getFotoFromApi();
+                },
+                getFotoFromApi() {
+                    fetch(`https://dog.ceo/api/breed/${this.raza}/images/random`)
+                    .then(r => r.json ())
+                    .then(respuesta => {
+                        console.log('respuesta', respuesta);
+                        console.log('mensaje', respuesta.message);
+                        console.log('status', respuesta.status);
+                        if(respuesta.status == 'error') { // caso error
+                            this.urlImagen = '';
+                            this.mensajeError = 'No existe la foto que buscas';
+                        } else { // caso de exito
+                            this.urlImagen = respuesta.message;
+                            this.mensajeError = '';
+                        }
+                    });
+                }
+            };
+        }
+    </script>
+
+</body>
+</html>

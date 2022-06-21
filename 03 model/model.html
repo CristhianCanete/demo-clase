@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Iterar</title>
+    <!-- <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script> -->
+    <script defer src="../cdn.min.js"></script>
+    <style media="screen">
+      p,
+      button {
+        margin-top: 1rem;
+      }
+
+
+input {
+  --bg-opacity: 1;
+  background-color: #f7fafc;
+  background-color: rgba(247, 250, 252, var(--bg-opacity));
+  border-radius: 0.25rem;
+  border-width: 1px;
+  --border-opacity: 1;
+  border-color: #e2e8f0;
+  border-color: rgba(226, 232, 240, var(--border-opacity));
+  height: 2.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+input:focus {
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+label {
+  display: block;
+  text-transform: uppercase;
+  --text-opacity: 1;
+  color: #718096;
+  color: rgba(113, 128, 150, var(--text-opacity));
+  font-size: 0.75rem;
+  letter-spacing: 0.025em;
+  margin-bottom: 0.25rem;
+}
+
+pre {
+  --bg-opacity: 1;
+  background-color: #f7fafc;
+  background-color: rgba(247, 250, 252, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #2d3748;
+  color: rgba(45, 55, 72, var(--text-opacity));
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 0.875rem;
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+}
+
+
+/* Buttons */
+
+button {
+  --bg-opacity: 1;
+  background-color: #667eea;
+  background-color: rgba(102, 126, 234, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border-radius: 0.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+button:focus {
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+button:hover {
+  --bg-opacity: 1;
+  background-color: #5a67d8;
+  background-color: rgba(90, 103, 216, var(--bg-opacity));
+}
+
+button:active {
+  --bg-opacity: 1;
+  background-color: #667eea;
+  background-color: rgba(102, 126, 234, var(--bg-opacity));
+}
+
+    </style>
+  </head>
+  <body>
+    <!-- Se define los datos reactivos -->
+    <div x-data="{name: ''}">
+      <label>Your name</label>
+      <!-- Se usa :atributo="" para "unir" un valor de data con un atributo -->
+      <!-- Con el evento @input se dispara y actualiza el valor de name -->
+      <!-- $event es una propiedad de Alpine que permite acceder al Evento del navegador -->
+      <input type="text" :value="name" @input="name = $event.target.value">
+      <!-- Se muestra el valor de name en un elemento -->
+      <p>Hi, my name is <span x-text="name || '_______________'"></span>! 👋</p>
+    </div>
+  </body>
+</html>

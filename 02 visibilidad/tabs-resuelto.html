@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Tabs</title>
+    <!-- <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script> -->
+    <script defer src="../cdn.min.js"></script>
+    <style media="screen">
+
+      button {
+        --bg-opacity: 1;
+        background-color: #667eea;
+        background-color: rgba(102, 126, 234, var(--bg-opacity));
+        --text-opacity: 1;
+        color: #fff;
+        color: rgba(255, 255, 255, var(--text-opacity));
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        border-radius: 0.25rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+      }
+
+      button:focus {
+        outline: 0;
+        box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+      }
+
+      button:hover {
+        --bg-opacity: 1;
+        background-color: #5a67d8;
+        background-color: rgba(90, 103, 216, var(--bg-opacity));
+      }
+
+      button:active {
+        --bg-opacity: 1;
+        background-color: #667eea;
+        background-color: rgba(102, 126, 234, var(--bg-opacity));
+      }
+
+      .button.active {
+        --bg-opacity: 1;
+        background-color: #ed64a6;
+        background-color: rgba(237, 100, 166, var(--bg-opacity));
+      }
+
+      .p {
+        margin-top: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div x-data="{activeTab: 0}">
+      <div>
+        <button
+          @click="activeTab = 0"
+          :class="{'active': activeTab === 0}"
+          >Tab 1</button>
+          <!-- Un valor de un atributo calculado desde x-data usando
+          :atributoNombre="" o x-bind:atributoNombre="" -->
+        <button
+          @click="activeTab = 1"
+          :class="{'active': activeTab === 1}"
+          >Tab 2</button>
+        <button
+          @click="activeTab = 2"
+          :class="{'active': activeTab === 2}"
+          >Tab 3</button>
+      </div>
+      <div>
+        <div x-show="activeTab === 0">
+          <p>I am the content of tab number one, and I think I just won! 🏆</p>
+        </div>
+        <div x-show="activeTab === 1">
+          <p>Heya! I root for number two, and so should you! ❤️</p>
+        </div>
+        <div x-show="activeTab === 2">
+          <p>Haha nice one, but I am number three, and now it's all about me! 😎</p>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
