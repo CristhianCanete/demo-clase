@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <title>Pokemon Finder</title>
     <style>
 
@@ -156,33 +157,39 @@
   </head>
   <body>
 
-    <div>
+    <div x-data="start()">
       <section class="webdesigntuts-workshop" >
         <form action="#" method="POST">
           <input type="search" placeholder="What are you looking for?" @input="pokeSearch()">
           <button>Search</button>
         </form>
       </section>
+
+      <div x-show="urlImagen">
+        <img :src="urlImagen" alt="Imagen de perro">
+    </div>
+
     </div>
     
 
     <script>
-      function pokeSearch() {
+      function start(){
         return {
-        // other default properties
-        isLoading: false,
-        pokemon: null,
-        fetchPokemon() {
-          this.isLoading = true;
-          fetch(`https://pokeapi.co/api/v2/pokemon/${this.pokemonSearch}`)
-          .then(res => res.json())
-          .then(data => {
-          this.isLoading = false;
-          this.pokemon = data;
-        });
-        }
-      }
-      }
+          name: '',
+          urlImagen: '',
+          mensajeError: '',
+          init() {
+            this.pokeSearch();
+          },
+          pokeSearch(){
+            fetch('https://pokeapi.co/api/v2/pokemon/charizard')
+            .then(r => r.json ())
+            .then(respuesta => {
+              console.log(respuesta)
+
+          });
+        } 
+      }}
     </script>
 
   </body>

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!--<script defer src="../cdn.min.js"></script>-->
     <style media="screen">
     *{
     margin: 0;
@@ -100,10 +101,10 @@
             <div class="row">
             <div class="col">
                 <div class="testimonial">
-                    <div x-swow="urlImagen">
-                        <img :src="urlImagen" alt=""/>
+                    <div x-swow="urlImagen1">
+                        <img :src="urlImagen1" alt=""/>
                     </div>
-                <div x-text="name" class="name">Full name</div>
+                <div x-text="name1" class="name1">Full name</div>
                 <div class="stars">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -120,8 +121,10 @@
 
             <div class="col">
                 <div class="testimonial">
-                <img :src="urlImagen" alt="">
-                <div x-text="name" class="name">Full name</div>
+                    <div x-show="urlImagen2"> 
+                        <img :src="urlImagen2" alt=""/>
+                    </div>
+                <div x-text="name2" class="name2">Full name</div>
                 <div class="stars">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -138,8 +141,10 @@
 
             <div class="col">
                 <div class="testimonial">
-                <img :src="urlImagen" alt="">
-                <div x-text="name" class="name">Full name</div>
+                        <div x-show="urlImagen3"> 
+                            <img :src="urlImagen3" alt=""/>
+                        </div>
+                <div x-text="name3" class="name3">Full name</div>
                 <div class="stars">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -159,30 +164,44 @@
         </div>
     </div>
     <script type="text/javascript">
-        const url = 'https://pokeapi.co/api/v2/ability/'
+        const urlApi = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=3'
 
         function start() {
-            return {
-                name: '', 
-                urlImagen: '',
+            return { 
+                name1: '',
+                urlImagen1: '',
+                name2: '',
+                urlImagen2: '',
+                name3: '',
+                urlImagen3: '',
                 init() {
-                    this.getFotoFromApi();
+                    this.getPokemonApi();
                 },
-                getFotoFromApi(){
-                fetch(url)
-                    .then(r => r.json())
-                    .then(respuesta => {
-                    console.log('urlImagen', respuesta.url)
-                    console.log('name', respuesta.results.name)
-                    console.log(respuesta)
+                getPokemonApi() {
+                    fetch(urlApi)
+                        .then(r => r.json())
+                        .then(respuesta => {
+                        console.log('name', respuesta.results[0].name);
+                        console.log('name2', respuesta.results[1].name);
+                        console.log('name3', respuesta.results[2].name);
 
-                    this.urlImagen = respuesta.url;
-                    this.name = respuesta.results.name;
-                })
+                        this.name1 = respuesta.results[0].name;
+                        this.name2 = respuesta.results[1].name;
+                        this.name3 = respuesta.results[2].name;
+
+                        //let urlApiImg = respuesta.results[0].url;
+                        for (i = 1; i <= 3; i++) {
+                            fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`)
+                                .then(r => r.json())
+                                .then(res => {
+                            });
+                        }
+                            
+                    })
                     .catch(err=>console.log(err))
-            }};
+                }
+            };
         }
-    </script>
     </script>
   </body>
 </html>
