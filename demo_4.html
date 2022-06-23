@@ -164,12 +164,12 @@
         </div>
     </div>
     <script type="text/javascript">
-        const urlApi = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=3'
+        const urlApi = 'https://pokeapi.co/api/v2/pokemon/?offset=1&limit=3'
 
         function start() {
             return { 
                 name1: '',
-                urlImagen1: '',
+                urlImagen1: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/2.png',
                 name2: '',
                 urlImagen2: '',
                 name3: '',
@@ -181,7 +181,7 @@
                     fetch(urlApi)
                         .then(r => r.json())
                         .then(respuesta => {
-                        console.log('name', respuesta.results[0].name);
+                        console.log('name1', respuesta.results[0].name);
                         console.log('name2', respuesta.results[1].name);
                         console.log('name3', respuesta.results[2].name);
 
@@ -190,13 +190,16 @@
                         this.name3 = respuesta.results[2].name;
 
                         //let urlApiImg = respuesta.results[0].url;
-                        for (i = 1; i <= 3; i++) {
+                        /*for (i = 2; i <= 4; i++) {
                             fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`)
                                 .then(r => r.json())
                                 .then(res => {
+                                console.log(res.sprites.front_default)
+                                this.urlImagen1 = res.sprites.front_default;
+                                this.urlImagen2 = res.sprites.front_default;
+                                this.urlImagen3 = res.sprites.front_default;
                             });
-                        }
-                            
+                        }  */  
                     })
                     .catch(err=>console.log(err))
                 }
